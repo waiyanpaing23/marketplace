@@ -1,0 +1,31 @@
+{% extends 'core/base.html' %}
+
+{% block title %}New Conversation{% endblock %}
+
+{% block content %}
+<div class="container p-5">
+    <div class="row">
+        <div class="col-6 offset-3">
+            <h2>New Conversation</h2>
+            <p class="text-muted">to {{ item.created_by }}</p>
+            <img src="{{item.image.url}}" class="rounded mb-4" width="200px">
+            <form action="" method="POST">
+                {% csrf_token %}
+                {{form.as_p}}
+
+                {% if form.errors or form.non_field_errors %}
+                <div class="text-danger">
+                    {% for field in form %}
+                        {{field.errors}}
+                    {% endfor %}
+
+                    {{form.non_field_errors}}
+                </div>
+                {% endif %}
+
+                <input type="submit" class="btn btn-dark mt-3" value="Submit">
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
