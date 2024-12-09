@@ -62,7 +62,7 @@ def detail(request, pk):
 
             conversation.save()
 
-            return redirect('conversation.detail', pk=pk)
+            return redirect('conversation:detail', pk=pk)
 
     else:
         form = ConversationMessageForm()

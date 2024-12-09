@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import logout
+from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from item.models import Category, Item
 from .forms import SignupForm
@@ -21,9 +21,11 @@ def signup(request):
         form = SignupForm(request.POST)
 
         if form.is_valid():
-            form.save()
+            user = form.save()
 
-            return redirect('/login/')
+            login(request, user)
+
+            return redirect('core:index')
     else:
         form = SignupForm()
 
